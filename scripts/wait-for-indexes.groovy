@@ -33,4 +33,3 @@ indexes.each { i ->
      mgmt.awaitGraphIndexStatus(graph, i).status(SchemaStatus.ENABLED).call()
    }
 }
-}
