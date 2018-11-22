@@ -88,10 +88,10 @@ processors:
             cacheMaxSize: 1000
 metrics:
     consoleReporter:
-        enabled: true
+        enabled: false
         interval: 180000
     csvReporter:
-        enabled: false
+        enabled: true
         interval: 180000
         fileName: /tmp/gremlin-server-metrics.csv
     jmxReporter:
