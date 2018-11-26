@@ -84,8 +84,8 @@ if (mgmt.getPropertyKey('index_url') == null)
 if (mgmt.getPropertyKey('extras') == null)
   mgmt.makePropertyKey('extras').dataType(String.class).make()
 
-if (mgmt.getPropertyKey('artifact_hash') == null)
-  mgmt.makePropertyKey('artifact_hash').dataType(String.class).make()
+if (mgmt.getPropertyKey('artifact_hash_sha256') == null)
+  mgmt.makePropertyKey('artifact_hash_sha256').dataType(String.class).make()
 
 if (mgmt.getPropertyKey('analysis_document_id') == null)
   mgmt.makePropertyKey('analysis_document_id').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
