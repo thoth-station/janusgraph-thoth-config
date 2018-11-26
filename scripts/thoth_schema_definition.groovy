@@ -28,6 +28,8 @@ if (mgmt.getVertexLabel('hardware_information') == null)
   mgmt.makeVertexLabel('hardware_information').make()
 if (mgmt.getVertexLabel('cve') == null)
   mgmt.makeVertexLabel('cve').make()
+if (mgmt.getVertexLabel('python_artifact') == null)
+  mgmt.makeVertexLabel('python_artifact').make()
 
 if (mgmt.getEdgeLabel('has_version') == null)
   mgmt.makeEdgeLabel('has_version').make()
@@ -79,6 +81,9 @@ if (mgmt.getPropertyKey('index') == null)
 
 if (mgmt.getPropertyKey('extras') == null)
   mgmt.makePropertyKey('extras').dataType(String.class).make()
+
+if (mgmt.getPropertyKey('artifact_hash') == null)
+  mgmt.makePropertyKey('artifact_hash').dataType(String.class).make()
 
 if (mgmt.getPropertyKey('analysis_document_id') == null)
   mgmt.makePropertyKey('analysis_document_id').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
