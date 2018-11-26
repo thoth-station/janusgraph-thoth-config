@@ -63,6 +63,8 @@ if (mgmt.getEdgeLabel('deb_pre_depends') == null)
   mgmt.makeEdgeLabel('deb_pre_depends').make()
 if (mgmt.getEdgeLabel('observation_document_id') == null)
   mgmt.makeEdgeLabel('observation_document_id').make()
+if (mgmt.getEdgeLabel('has_artifact') == null)
+  mgmt.makeEdgeLabel('has_artifact').make()
 
 if (mgmt.getPropertyKey('ecosystem') == null)
   mgmt.makePropertyKey('ecosystem').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
