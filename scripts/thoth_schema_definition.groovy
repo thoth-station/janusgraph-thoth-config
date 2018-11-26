@@ -28,6 +28,8 @@ if (mgmt.getVertexLabel('hardware_information') == null)
   mgmt.makeVertexLabel('hardware_information').make()
 if (mgmt.getVertexLabel('cve') == null)
   mgmt.makeVertexLabel('cve').make()
+if (mgmt.getVertexLabel('python_artifact') == null)
+  mgmt.makeVertexLabel('python_artifact').make()
 
 if (mgmt.getEdgeLabel('has_version') == null)
   mgmt.makeEdgeLabel('has_version').make()
@@ -61,6 +63,8 @@ if (mgmt.getEdgeLabel('deb_pre_depends') == null)
   mgmt.makeEdgeLabel('deb_pre_depends').make()
 if (mgmt.getEdgeLabel('observation_document_id') == null)
   mgmt.makeEdgeLabel('observation_document_id').make()
+if (mgmt.getEdgeLabel('has_artifact') == null)
+  mgmt.makeEdgeLabel('has_artifact').make()
 
 if (mgmt.getPropertyKey('ecosystem') == null)
   mgmt.makePropertyKey('ecosystem').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
@@ -79,6 +83,9 @@ if (mgmt.getPropertyKey('index') == null)
 
 if (mgmt.getPropertyKey('extras') == null)
   mgmt.makePropertyKey('extras').dataType(String.class).make()
+
+if (mgmt.getPropertyKey('artifact_hash') == null)
+  mgmt.makePropertyKey('artifact_hash').dataType(String.class).make()
 
 if (mgmt.getPropertyKey('analysis_document_id') == null)
   mgmt.makePropertyKey('analysis_document_id').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
