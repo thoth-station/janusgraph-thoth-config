@@ -1,0 +1,58 @@
+---
+- name: "Deploy Thoth's Gremlin Server"
+  hosts: gremlin_servers
+
+  remote_user: centos
+  become: true
+
+  tasks:
+    - name: "upgrade all packages"
+      yum: name=* state=latest
+
+    - name: "install required packages"
+      yum:
+        name:
+          ['git', 'curl', 'unzip', 'java-1.8.0-openjdk-headless']
+        state: installed
+
+    - name: "downloading JanusGraph distribution"
+      get_url:
+        url: "https://github.com/JanusGraph/janusgraph/releases/download/v{{janusgraph_version}}/janusgraph-{{janusgraph_version}}-hadoop2.zip"
+        follow: true
+        dest: "/tmp/janusgraph-{{janusgraph_version}}-hadoop2.zip"
+        mode: 0440
+
+    - name: "create JanusGraph directory"
+      file:
+        path: "{{janusgraph_destination_directory}}"
+        state: directory
+        mode: 0755
+
+    - name: "Unarchive JanusGraph distribution to {{janusgraph_destination_directory}}"
+      unarchive:
+        src: "/tmp/janusgraph-{{janusgraph_version}}-hadoop2.zip"
+        dest: "{{janusgraph_destination_directory}}"
+        remote_src: true
+
+    - name: "clone Thoth's configuration for JanusGraph"
+      connection: local
+      git:
+        repo: "https://github.com/thoth-station/janusgraph-thoth-config.git"
+        dest: "{{thoth_janusgraph_config_base}}"
+        version: "v{{janusgraph_version}}-{{thoth_janusgraph_release}}"
+
+    - name: "copy Thoth's configuration for JanusGraph"
+      copy:
+        src: "{{thoth_janusgraph_config_base}}/"
+        dest: "{{janusgraph_destination_directory}}/janusgraph-{{janusgraph_version}}-hadoop2/"
+
+    - name: "setting permissions on `thoth-gremlin-server.sh`"
+      file:
+        path: "{{janusgraph_destination_directory}}/janusgraph-{{janusgraph_version}}-hadoop2/bin/thoth-gremlin-server.sh"
+        mode: 00750
+
+    - name: "clean up local clone of Thoth's configuration for JanusGraph"
+      connection: local
+      file:
+        path: "{{thoth_janusgraph_config_base}}"
+        state: absent
