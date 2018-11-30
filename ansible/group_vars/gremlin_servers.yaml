@@ -1,0 +1,4 @@
+janusgraph_version: 0.3.1
+janusgraph_destination_directory: "/opt/janusgraph"
+thoth_janusgraph_release: 1
+thoth_janusgraph_config_base: "/tmp/janusgraph-thoth-config"
