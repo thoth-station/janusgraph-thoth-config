@@ -20,6 +20,7 @@ scriptEngines:
                     - scripts/empty-sample.groovy
                     - scripts/thoth_schema_definition.groovy
                     - scripts/indices/byCVE.groovy
+                    - scripts/indices/byDebPackageVersion.groovy
                     - scripts/indices/byDependsOn.groovy
                     - scripts/indices/byEcosystemSolver.groovy
                     - scripts/indices/byEdge.groovy
