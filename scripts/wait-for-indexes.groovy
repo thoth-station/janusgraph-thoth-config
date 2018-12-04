@@ -13,6 +13,7 @@ indexes = [
   'byEdge',
   'byIsPartOf',
   'byPackage',
+  'byPythonArtifact',
   'byPythonPackageVersion',
   'byRequires',
   'byRPMPackageVersion',
