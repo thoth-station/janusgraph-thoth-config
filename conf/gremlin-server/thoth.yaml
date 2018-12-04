@@ -32,6 +32,7 @@ scriptEngines:
                     - scripts/indices/byRPMRequirement.groovy
                     - scripts/indices/byRuntimeEnvironment.groovy
                     - scripts/indices/bySolved.groovy
+                    - scripts/wait-for-indexes.groovy
 
 serializers:
     - 
