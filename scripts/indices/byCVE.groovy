@@ -14,7 +14,7 @@ if (mgmt.getGraphIndex("byCVE") == null) {
   cve_id = mgmt.getPropertyKey('cve_id')
 
   // No property edges match.
-  mgmt.buildIndex('byCVE', Edge.class) \
+  mgmt.buildIndex('byCVE', Vertex.class) \
    .addKey(lbl) \
    .addKey(type) \
    .addKey(version_range) \
