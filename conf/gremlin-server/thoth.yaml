@@ -26,6 +26,7 @@ scriptEngines:
                     - scripts/indices/byEdge.groovy
                     - scripts/indices/byIsPartOf.groovy
                     - scripts/indices/byPackage.groovy
+                    - scripts/indices/byPythonArtifact.groovy
                     - scripts/indices/byPythonPackageVersion.groovy
                     - scripts/indices/byRequires.groovy
                     - scripts/indices/byRPMPackageVersion.groovy
