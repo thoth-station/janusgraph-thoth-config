@@ -1,7 +1,7 @@
 :remote connect tinkerpop.server conf/remote.yaml session
 :remote console
 
-indexes = [
+String[] indexes = [
   'byCVE',
   'byDebPackageVersion',
   'byDependsOn',
@@ -18,23 +18,46 @@ indexes = [
   'bySolved',
 ]
 
+// The Labels we use
+String[] vertexLabels = [
+    'package',
+    'software_stack',
+    'python_package_index',
+    'python_package_version',
+    'rpm_requirement',
+    'runtime_environment',
+    'deb_package_version',
+    'buildtime_environment',
+    'rpm_package_version',
+    'ecosystem_solver',
+    'software_stack_observation',
+    'hardware_information',
+    'cve',
+    'python_artifact',
+]
+
+// The Map of VertexLabels
+Map<String, String> vertexLabel = new HashMap<String, String>();
+
+def makeOrCreateVertexLabel(name) {
+    def label = mgmt.getVertexLabel(name)
+    
+    if (label == null) {
+        label = mgmt.makeVertexLabel(name).make()
+    }
+
+    return label
+}
+
 graph.tx().rollback()
 
-mgmt = graph.openManagement()
+def mgmt = graph.openManagement()
 
-mgmt.makeVertexLabel('package').make()
-mgmt.makeVertexLabel('software_stack').make()
-mgmt.makeVertexLabel('python_package_index').make()
-mgmt.makeVertexLabel('rpm_requirement').make()
-mgmt.makeVertexLabel('runtime_environment').make()
-mgmt.makeVertexLabel('deb_package_version').make()
-mgmt.makeVertexLabel('buildtime_environment').make()
-mgmt.makeVertexLabel('rpm_package_version').make()
-mgmt.makeVertexLabel('ecosystem_solver').make()
-mgmt.makeVertexLabel('software_stack_observation').make()
-mgmt.makeVertexLabel('hardware_information').make()
-mgmt.makeVertexLabel('cve').make()
-mgmt.makeVertexLabel('python_artifact').make()
+// lets create all our Vertex Labels and store them in a Map
+for (label in vertexLabels) {
+    vertexLabel.put(label, makeOrCreateVertexLabel(label))
+}
+print(vertexLabel)
 
 mgmt.makeEdgeLabel('has_version').make()
 mgmt.makeEdgeLabel('is_part_of').make()
@@ -104,12 +127,10 @@ gpu_cores= mgmt.makePropertyKey('gpu_cores').dataType(Integer.class).cardinality
 gpu_memory_size=   mgmt.makePropertyKey('gpu_memory_size').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 gpu_ram_size= mgmt.makePropertyKey('gpu_ram_size').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
-lbl = mgmt.makePropertyKey('__label__').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
-type = mgmt.makePropertyKey('__type__').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+def lbl = mgmt.makePropertyKey('__label__').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+def type = mgmt.makePropertyKey('__type__').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 println "Done with Schema creating!"
-
-python_package_version = mgmt.makeVertexLabel('python_package_version').make()
 
 mgmt.buildIndex('byEdge', Edge.class) \
     .addKey(lbl) \
