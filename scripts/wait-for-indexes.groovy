@@ -1,3 +1,6 @@
+:remote connect tinkerpop.server conf/remote-test-2.yaml session
+:remote console
+
 graph.tx().rollback()
 
 mgmt = graph.openManagement()

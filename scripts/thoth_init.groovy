@@ -1,5 +1,11 @@
-:remote connect tinkerpop.server conf/remote.yaml session
+:remote connect tinkerpop.server conf/remote-test-2.yaml session
 :remote console
+
+import java.util.logging.Logger
+
+
+Logger logger = Logger.getLogger("")
+logger.info("Thoth Schema creationg script v0.1.0")
 
 String[] indexes = [
   'byCVE',
@@ -35,15 +41,45 @@ String[] vertexLabels = [
     'cve',
     'python_artifact',
 ]
+String[] edgeLabels = [
+    'has_version',
+    'is_part_of',
+    'runs_on',
+    'runs_in',
+    'builds_in',
+    'builds_on',
+    'depends_on',
+    'creates_stack',
+    'requires',
+    'solved',
+    'runs_in',
+    'has_vulnerability',
+    'deb_replaces',
+    'deb_depends',
+    'deb_pre_depends',
+    'observation_document_id',
+    'has_artifact',
+]
 
-// The Map of VertexLabels
+// The Maps of Labels
 Map<String, String> vertexLabel = new HashMap<String, String>();
+Map<String, String> edgeLabel = new HashMap<String, String>();
 
 def makeOrCreateVertexLabel(name) {
-    def label = mgmt.getVertexLabel(name)
+    label = mgmt.getVertexLabel(name)
     
     if (label == null) {
         label = mgmt.makeVertexLabel(name).make()
+    }
+
+    return label
+}
+
+def makeOrCreateEdgeLabel(name) {
+    label = mgmt.getEdgeLabel(name)
+    
+    if (label == null) {
+        label = mgmt.makeEdgeLabel(name).make()
     }
 
     return label
@@ -57,25 +93,12 @@ def mgmt = graph.openManagement()
 for (label in vertexLabels) {
     vertexLabel.put(label, makeOrCreateVertexLabel(label))
 }
-print(vertexLabel)
 
-mgmt.makeEdgeLabel('has_version').make()
-mgmt.makeEdgeLabel('is_part_of').make()
-mgmt.makeEdgeLabel('runs_on').make()
-mgmt.makeEdgeLabel('runs_in').make()
-mgmt.makeEdgeLabel('builds_in').make()
-mgmt.makeEdgeLabel('builds_on').make()
-mgmt.makeEdgeLabel('depends_on').make()
-mgmt.makeEdgeLabel('creates_stack').make()
-mgmt.makeEdgeLabel('requires').make()
-mgmt.makeEdgeLabel('solved').make()
-mgmt.makeEdgeLabel('runs_in').make()
-mgmt.makeEdgeLabel('has_vulnerability').make()
-mgmt.makeEdgeLabel('deb_replaces').make()
-mgmt.makeEdgeLabel('deb_depends').make()
-mgmt.makeEdgeLabel('deb_pre_depends').make()
-mgmt.makeEdgeLabel('observation_document_id').make()
-mgmt.makeEdgeLabel('has_artifact').make()
+// lets create all our Edge Labels and store them in a Map
+for (label in edgeLabels) {
+    edgeLabel.put(label, makeOrCreateEdgeLabel(label))
+}
+
 
 ecosystem = mgmt.makePropertyKey('ecosystem').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 rpm_requirement_name = mgmt.makePropertyKey('rpm_requirement_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
@@ -95,20 +118,20 @@ url=mgmt.makePropertyKey('url').dataType(String.class).cardinality(org.janusgrap
 warehouse_api_url=mgmt.makePropertyKey('warehouse_api_url').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 verify_ssl=mgmt.makePropertyKey('verify_ssl').dataType(Boolean.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 warehouse=mgmt.makePropertyKey('warehouse').dataType(Boolean.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
-package_version =   mgmt.makePropertyKey('package_version').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
-solver_document_id=    mgmt.makePropertyKey('solver_document_id').dataType(String.class).make()
-solver_name  = mgmt.makePropertyKey('solver_name').dataType(String.class).make()
+package_version = mgmt.makePropertyKey('package_version').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+solver_document_id = mgmt.makePropertyKey('solver_document_id').dataType(String.class).make()
+solver_name = mgmt.makePropertyKey('solver_name').dataType(String.class).make()
 solver_version =  mgmt.makePropertyKey('solver_version').dataType(String.class).make()
 solver_datetime = mgmt.makePropertyKey('solver_datetime').dataType(Integer.class).make()
-solver_error   = mgmt.makePropertyKey('solver_error').dataType(Boolean.class).make()
-solver_error_unsolvable  = mgmt.makePropertyKey('solver_error_unsolvable').dataType(Boolean.class).make()
-solver_error_unparsable  = mgmt.makePropertyKey('solver_error_unparsable').dataType(Boolean.class).make()
+solver_error = mgmt.makePropertyKey('solver_error').dataType(Boolean.class).make()
+solver_error_unsolvable = mgmt.makePropertyKey('solver_error_unsolvable').dataType(Boolean.class).make()
+solver_error_unparsable = mgmt.makePropertyKey('solver_error_unparsable').dataType(Boolean.class).make()
 runtime_environment_name =  mgmt.makePropertyKey('runtime_environment_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 buildtime_environment_name =  mgmt.makePropertyKey('buildtime_environment_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
-release=   mgmt.makePropertyKey('release').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
-epoch =  mgmt.makePropertyKey('epoch').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
-arch =  mgmt.makePropertyKey('arch').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
-src =  mgmt.makePropertyKey('src').dataType(Boolean.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+release = mgmt.makePropertyKey('release').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+epoch = mgmt.makePropertyKey('epoch').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+arch = mgmt.makePropertyKey('arch').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+src = mgmt.makePropertyKey('src').dataType(Boolean.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 package_identifier =  mgmt.makePropertyKey('package_identifier').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 advisory  =mgmt.makePropertyKey('advisory').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 cve_name  = mgmt.makePropertyKey('cve_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
@@ -127,10 +150,10 @@ gpu_cores= mgmt.makePropertyKey('gpu_cores').dataType(Integer.class).cardinality
 gpu_memory_size=   mgmt.makePropertyKey('gpu_memory_size').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 gpu_ram_size= mgmt.makePropertyKey('gpu_ram_size').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
-def lbl = mgmt.makePropertyKey('__label__').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
-def type = mgmt.makePropertyKey('__type__').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+lbl = mgmt.makePropertyKey('__label__').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+type = mgmt.makePropertyKey('__type__').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
-println "Done with Schema creating!"
+logger.info("Creating Schema done!")
 
 mgmt.buildIndex('byEdge', Edge.class) \
     .addKey(lbl) \
@@ -258,4 +281,4 @@ mgmt.buildIndex('byDebPackageVersion', Vertex.class) \
 
 mgmt.commit()
 
-println "Creating Indicies done!"
+logger.info("Creating Indicies done!")
