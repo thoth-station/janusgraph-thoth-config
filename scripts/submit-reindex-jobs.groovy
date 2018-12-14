@@ -20,6 +20,7 @@ indexes = [
   'byRPMRequirement',
   'byRuntimeEnvironment',
   'bySolved',
+  'bySoftwareStack'
 ]
 
 //Wait for the index to become available

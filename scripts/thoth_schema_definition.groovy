@@ -30,6 +30,8 @@ if (mgmt.getVertexLabel('cve') == null)
   mgmt.makeVertexLabel('cve').make()
 if (mgmt.getVertexLabel('python_artifact') == null)
   mgmt.makeVertexLabel('python_artifact').make()
+if (mgmt.getVertexLabel('software_stack_name') == null)
+  mgmt.makeVertexLabel('software_stack_name').make()
 
 if (mgmt.getEdgeLabel('has_version') == null)
   mgmt.makeEdgeLabel('has_version').make()

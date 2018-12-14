@@ -17,6 +17,7 @@ indexes = [
   'byRPMRequirement',
   'byRuntimeEnvironment',
   'bySolved',
+  'bySoftwareStack'
 ]
 
 indexes.each { i ->
