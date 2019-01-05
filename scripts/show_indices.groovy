@@ -1,4 +1,4 @@
-:remote connect tinkerpop.server conf/remote.yaml session
+:remote connect tinkerpop.server conf/remote-3.yaml session
 :remote console
 
 mgmt = graph.openManagement()

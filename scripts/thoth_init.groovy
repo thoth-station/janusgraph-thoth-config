@@ -1,4 +1,4 @@
-:remote connect tinkerpop.server conf/remote.yaml session
+:remote connect tinkerpop.server conf/remote-test-3.yaml session
 :remote console
 
 indexes = [
@@ -239,7 +239,7 @@ mgmt.buildIndex('byDebPackageVersion', Vertex.class) \
 mgmt.buildIndex('bySoftwareStack', Vertex.class) \
     .addKey(lbl) \
     .addKey(type) \
-    .addKey(software_stack_key) \
+    .addKey(software_stack_name) \
     .buildCompositeIndex()
 
 mgmt.commit()
