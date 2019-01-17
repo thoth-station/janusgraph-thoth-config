@@ -201,6 +201,9 @@ if (mgmt.getPropertyKey('cpu_family') == null)
 if (mgmt.getPropertyKey('cpu_cores') == null)
   mgmt.makePropertyKey('cpu_cores').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
+if (mgmt.getPropertyKey('cpu_physical_cpus') == null)
+  mgmt.makePropertyKey('cpu_physical_cpus').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+
 if (mgmt.getPropertyKey('gpu_vendor') == null)
   mgmt.makePropertyKey('gpu_vendor').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
