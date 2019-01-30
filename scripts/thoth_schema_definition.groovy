@@ -222,6 +222,15 @@ if (mgmt.getPropertyKey('gpu_memory_size') == null)
 if (mgmt.getPropertyKey('gpu_ram_size') == null)
   mgmt.makePropertyKey('gpu_ram_size').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
+if (mgmt.getPropertyKey('os_name') == null)
+  mgmt.makePropertyKey('os_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+
+if (mgmt.getPropertyKey('os_version') == null)
+  mgmt.makePropertyKey('os_version').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+
+if (mgmt.getPropertyKey('python_version') == null)
+  mgmt.makePropertyKey('python_version').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+
 if (mgmt.getPropertyKey('__label__') == null)
   mgmt.makePropertyKey('__label__').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
