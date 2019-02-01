@@ -228,6 +228,18 @@ if (mgmt.getPropertyKey('__label__') == null)
 if (mgmt.getPropertyKey('__type__') == null)
   mgmt.makePropertyKey('__type__').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
+if (mgmt.getPropertyKey('is_user_stack') == null)
+  mgmt.makePropertyKey('is_user_stack').dataType(Boolean.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+
+if (mgmt.getPropertyKey('is_adviser_stack') == null)
+  mgmt.makePropertyKey('is_adviser_stack').dataType(Boolean.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+
+if (mgmt.getPropertyKey('is_inspection_stack') == null)
+  mgmt.makePropertyKey('is_inspection_stack').dataType(Boolean.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+
+if (mgmt.getPropertyKey('adviser_stack_index') == null)
+  mgmt.makePropertyKey('adviser_stack_index').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+
 mgmt.commit()
 
 println "Done with Schema creating!"
