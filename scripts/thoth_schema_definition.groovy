@@ -4,8 +4,12 @@ mgmt = graph.openManagement()
 
 if (mgmt.getVertexLabel('package') == null)
   mgmt.makeVertexLabel('package').make()
-if (mgmt.getVertexLabel('software_stack') == null)
-  mgmt.makeVertexLabel('software_stack').make()
+if (mgmt.getVertexLabel('adviser_software_stack') == null)
+  mgmt.makeVertexLabel('adviser_software_stack').make()
+if (mgmt.getVertexLabel('user_software_stack') == null)
+  mgmt.makeVertexLabel('user_software_stack').make()
+if (mgmt.getVertexLabel('inspection_software_stack') == null)
+  mgmt.makeVertexLabel('inspection_software_stack').make()
 if (mgmt.getVertexLabel('python_package_index') == null)
   mgmt.makeVertexLabel('python_package_index').make()
 if (mgmt.getVertexLabel('python_package_version') == null)
@@ -231,20 +235,14 @@ if (mgmt.getPropertyKey('os_version') == null)
 if (mgmt.getPropertyKey('python_version') == null)
   mgmt.makePropertyKey('python_version').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
+if (mgmt.getPropertyKey('origin') == null)
+  mgmt.makePropertyKey('origin').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+
 if (mgmt.getPropertyKey('__label__') == null)
   mgmt.makePropertyKey('__label__').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('__type__') == null)
   mgmt.makePropertyKey('__type__').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
-
-if (mgmt.getPropertyKey('is_user_stack') == null)
-  mgmt.makePropertyKey('is_user_stack').dataType(Boolean.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
-
-if (mgmt.getPropertyKey('is_adviser_stack') == null)
-  mgmt.makePropertyKey('is_adviser_stack').dataType(Boolean.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
-
-if (mgmt.getPropertyKey('is_inspection_stack') == null)
-  mgmt.makePropertyKey('is_inspection_stack').dataType(Boolean.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('adviser_stack_index') == null)
   mgmt.makePropertyKey('adviser_stack_index').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
