@@ -18,7 +18,7 @@
 [ -z "$SUDO_COMMAND" ] && exec sudo $0
 
 JANUSGRAPH_VERSION="0.3.1-hadoop2"
-JANUSGRAPH_WORKDIR="/opt/janusgraph-${JANUSGRAPH_VERSION}"
+JANUSGRAPH_WORKDIR="/opt/janusgraph/janusgraph-${JANUSGRAPH_VERSION}"
 
 if ! type buildah; then
     dnf install -y --setopt=tsflags=nodocs buildah
@@ -51,7 +51,7 @@ buildah run $ctr -- chown user:user -R "${JANUSGRAPH_WORKDIR}"
 buildah config --annotation "ninja.thoth-station.build.host=$(uname -n)" $ctr
 buildah config --author fridolin@redhat.com $ctr
 buildah config --cmd "/bin/bash" $ctr
-buildah config --workingdir "${JANUSGRAPH_VERSION}" $ctr
+buildah config --workingdir "${JANUSGRAPH_WORKDIR}" $ctr
 buildah config --user user $ctr
 buildah config --entrypoint "${JANUSGRAPH_WORKDIR}/bin/thoth-gremlin-server.sh" $ctr
 
