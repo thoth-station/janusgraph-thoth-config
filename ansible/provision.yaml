@@ -12,7 +12,7 @@
     - name: "install required packages"
       yum:
         name:
-          ['screen', 'tmux', 'zsh', 'git', 'curl', 'unzip', 'java-1.8.0-openjdk-headless']
+          ['screen', 'bzip2', 'tmux', 'zsh', 'git', 'curl', 'unzip', 'java-1.8.0-openjdk-headless']
         state: installed
 
     - name: "downloading JanusGraph distribution"

@@ -1,4 +1,4 @@
-:remote connect tinkerpop.server conf/remote-test-3.yaml session
+:remote connect tinkerpop.server conf/remote-test-4.yaml session
 :remote console
 
 indexes = [
@@ -106,6 +106,8 @@ gpu_cores= mgmt.makePropertyKey('gpu_cores').dataType(Integer.class).cardinality
 gpu_memory_size=   mgmt.makePropertyKey('gpu_memory_size').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 gpu_ram_size= mgmt.makePropertyKey('gpu_ram_size').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 software_stack_name = mgmt.makePropertyKey('software_stack_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+cpu_physical_cpus = mgmt.makePropertyKey('cpu_physical_cpus').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+ram_size = mgmt.makePropertyKey('ram_size').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 lbl = mgmt.makePropertyKey('__label__').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 type = mgmt.makePropertyKey('__type__').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
