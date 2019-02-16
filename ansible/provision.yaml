@@ -2,8 +2,8 @@
 - name: "Deploy Thoth's Gremlin Server"
   hosts: gremlin_servers
 
-  remote_user: centos
-  become: true
+  remote_user: root
+  become: false
 
   tasks:
     - name: "upgrade all packages"
@@ -12,7 +12,7 @@
     - name: "install required packages"
       yum:
         name:
-          ['git', 'curl', 'unzip', 'java-1.8.0-openjdk-headless']
+          ['screen', 'bzip2', 'tmux', 'zsh', 'git', 'curl', 'unzip', 'java-1.8.0-openjdk-headless']
         state: installed
 
     - name: "downloading JanusGraph distribution"
@@ -37,9 +37,10 @@
     - name: "clone Thoth's configuration for JanusGraph"
       connection: local
       git:
-        repo: "https://github.com/thoth-station/janusgraph-thoth-config.git"
+        repo: "https://github.com/goern/janusgraph-thoth-config.git"
         dest: "{{thoth_janusgraph_config_base}}"
-        version: "v{{janusgraph_version}}-{{thoth_janusgraph_release}}"
+        # version: "v{{janusgraph_version}}-{{thoth_janusgraph_release}}"
+        version: "feature/index_creation_script"
 
     - name: "copy Thoth's configuration for JanusGraph"
       copy:

@@ -1,3 +1,6 @@
+:remote connect tinkerpop.server conf/remote.yaml session
+:remote console
+
 graph.tx().rollback()
 
 mgmt = graph.openManagement()
@@ -17,6 +20,7 @@ indexes = [
   'byRPMRequirement',
   'byRuntimeEnvironment',
   'bySolved',
+  'bySoftwareStack',
 ]
 
 indexes.each { i ->
