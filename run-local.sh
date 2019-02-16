@@ -22,11 +22,11 @@ set -x
 which which > /dev/null
 which buildah > /dev/null
 
-JANUSGRAPH_VERSION="0.2.0-hadoop2"
-JANUSGRAPH_WORKDIR="/opt/janusgraph-${JANUSGRAPH_VERSION}"
+source ./vars.sh
 
 podman images | grep localhost/thoth-janusgraph -q || {
     echo "No localhost/thoth-janusgraph image found, build it using ./local-build.sh"
 }
 
-podman run -it -p 8182:8182 -v "${PWD}/scripts/:${JANUSGRAPH_WORKDIR}/scripts:Z" localhost/thoth-janusgraph
+# podman run -it -p 8182:8182 -v "${PWD}/scripts/:${JANUSGRAPH_WORKDIR}/scripts:Z" localhost/thoth-janusgraph
+podman run -it -p 8182:8182 -v "${PWD}/scripts/:${JANUSGRAPH_WORKDIR}/scripts:Z" --entrypoint "${JANUSGRAPH_WORKDIR}/bin/local-entrypoint.sh" localhost/thoth-janusgraph
