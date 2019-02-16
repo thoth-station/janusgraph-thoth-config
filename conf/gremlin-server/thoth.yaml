@@ -17,23 +17,7 @@ scriptEngines:
                     - 'java.lang.Math#*'
             org.apache.tinkerpop.gremlin.jsr223.ScriptFileGremlinPlugin:
                 files:
-                    - scripts/empty-sample.groovy
-                    - scripts/thoth_schema_definition.groovy
-                    - scripts/indices/byCVE.groovy
-                    - scripts/indices/byDebPackageVersion.groovy
-                    - scripts/indices/byDependsOn.groovy
-                    - scripts/indices/byEcosystemSolver.groovy
-                    - scripts/indices/byEdge.groovy
-                    - scripts/indices/byIsPartOf.groovy
-                    - scripts/indices/byPackage.groovy
-                    - scripts/indices/byPythonArtifact.groovy
-                    - scripts/indices/byPythonPackageVersion.groovy
-                    - scripts/indices/byRequires.groovy
-                    - scripts/indices/byRPMPackageVersion.groovy
-                    - scripts/indices/byRPMRequirement.groovy
-                    - scripts/indices/byRuntimeEnvironment.groovy
-                    - scripts/indices/bySolved.groovy
-                    - scripts/wait-for-indexes.groovy
+                    - scripts/graph_init.groovy
 
 serializers:
     - 
