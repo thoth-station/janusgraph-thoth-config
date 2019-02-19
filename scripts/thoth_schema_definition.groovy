@@ -1,3 +1,6 @@
+:remote connect tinkerpop.server conf/remote.yaml session
+:remote console
+
 mgmt = graph.openManagement()
 
 if (mgmt.getVertexLabel('adviser_software_stack') == null)
@@ -67,13 +70,13 @@ if (mgmt.getEdgeLabel('solved') == null)
   mgmt.makeEdgeLabel('solved').make()
 
 if (mgmt.getPropertyKey('adviser_error') == null)
-  mgmt.makePropertyKey('adviser_error').dataType(Boolean.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('adviser_error').dataType(Boolean.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('adviser_stack_index') == null)
-  mgmt.makePropertyKey('adviser_stack_index').dataType(Integer.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('adviser_stack_index').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('advisory') == null)
-  mgmt.makePropertyKey('advisory').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('advisory').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('analysis_datetime') == null)
   mgmt.makePropertyKey('analysis_datetime').dataType(Integer.class).make()
@@ -88,97 +91,97 @@ if (mgmt.getPropertyKey('analyzer_version') == null)
   mgmt.makePropertyKey('analyzer_version').dataType(String.class).make()
 
 if (mgmt.getPropertyKey('arch') == null)
-  mgmt.makePropertyKey('arch').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('arch').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('artifact_hash_sha256') == null)
-  mgmt.makePropertyKey('artifact_hash_sha256').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('artifact_hash_sha256').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('build_error') == null)
   mgmt.makePropertyKey('build_error').dataType(Boolean.class).make()
 
 if (mgmt.getPropertyKey('buildtime_environment_name') == null)
-  mgmt.makePropertyKey('buildtime_environment_name').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('buildtime_environment_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('cpu_cores') == null)
-  mgmt.makePropertyKey('cpu_cores').dataType(Integer.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('cpu_cores').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('cpu_family') == null)
-  mgmt.makePropertyKey('cpu_family').dataType(Integer.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('cpu_family').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('cpu_model') == null)
-  mgmt.makePropertyKey('cpu_model').dataType(Integer.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('cpu_model').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('cpu_model_name') == null)
-  mgmt.makePropertyKey('cpu_model_name').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('cpu_model_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('cpu_physical_cpus') == null)
-  mgmt.makePropertyKey('cpu_physical_cpus').dataType(Integer.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('cpu_physical_cpus').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('cuda_version') == null)
-  mgmt.makePropertyKey('cuda_version').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('cuda_version').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('cve_id') == null)
-  mgmt.makePropertyKey('cve_id').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('cve_id').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('cve_name') == null)
-  mgmt.makePropertyKey('cve_name').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('cve_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('document_id') == null)
-  mgmt.makePropertyKey('document_id').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('document_id').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('ecosystem') == null)
-  mgmt.makePropertyKey('ecosystem').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('ecosystem').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('epoch') == null)
-  mgmt.makePropertyKey('epoch').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('epoch').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('extras') == null)
   mgmt.makePropertyKey('extras').dataType(String.class).make()
 
 if (mgmt.getPropertyKey('index_url') == null)
-  mgmt.makePropertyKey('index_url').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('index_url').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('inspection_document_id') == null)
   mgmt.makePropertyKey('inspection_document_id').dataType(String.class).make()
 
 if (mgmt.getPropertyKey('origin') == null)
-  mgmt.makePropertyKey('origin').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('origin').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('os_name') == null)
-  mgmt.makePropertyKey('os_name').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('os_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('os_version') == null)
-  mgmt.makePropertyKey('os_version').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('os_version').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('package_identifier') == null)
-  mgmt.makePropertyKey('package_identifier').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('package_identifier').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('package_name') == null)
-  mgmt.makePropertyKey('package_name').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('package_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('package_version') == null)
-  mgmt.makePropertyKey('package_version').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('package_version').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('performance_index') == null)
-  mgmt.makePropertyKey('performance_index').dataType(Float.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('performance_index').dataType(Float.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('python_version') == null)
-  mgmt.makePropertyKey('python_version').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('python_version').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('ram_size') == null)
-  mgmt.makePropertyKey('ram_size').dataType(Integer.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('ram_size').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('release') == null)
-  mgmt.makePropertyKey('release').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('release').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('rpm_requirement_name') == null)
-  mgmt.makePropertyKey('rpm_requirement_name').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('rpm_requirement_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('run_error') == null)
   mgmt.makePropertyKey('run_error').dataType(Boolean.class).make()
 
 if (mgmt.getPropertyKey('runtime_environment_name') == null)
-  mgmt.makePropertyKey('runtime_environment_name').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('runtime_environment_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('solver_datetime') == null)
   mgmt.makePropertyKey('solver_datetime').dataType(Integer.class).make()
@@ -196,31 +199,31 @@ if (mgmt.getPropertyKey('solver_error_unsolvable') == null)
   mgmt.makePropertyKey('solver_error_unsolvable').dataType(Boolean.class).make()
 
 if (mgmt.getPropertyKey('solver_name') == null)
-  mgmt.makePropertyKey('solver_name').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('solver_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('solver_version') == null)
-  mgmt.makePropertyKey('solver_version').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('solver_version').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('src') == null)
-  mgmt.makePropertyKey('src').dataType(Boolean.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('src').dataType(Boolean.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('url') == null)
-  mgmt.makePropertyKey('url').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('url').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('verify_ssl') == null)
-  mgmt.makePropertyKey('verify_ssl').dataType(Boolean.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('verify_ssl').dataType(Boolean.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('version_range') == null)
-  mgmt.makePropertyKey('version_range').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('version_range').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('warehouse_api_url') == null)
-  mgmt.makePropertyKey('warehouse_api_url').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('warehouse_api_url').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('__label__') == null)
-  mgmt.makePropertyKey('__label__').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('__label__').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 if (mgmt.getPropertyKey('__type__') == null)
-  mgmt.makePropertyKey('__type__').dataType(String.class).cardinality(Cardinality.SINGLE).make()
+  mgmt.makePropertyKey('__type__').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 
 mgmt.commit()

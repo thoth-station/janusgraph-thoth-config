@@ -12,7 +12,7 @@
     - name: "install required packages"
       yum:
         name:
-          ['screen', 'bzip2', 'tmux', 'zsh', 'git', 'curl', 'unzip', 'java-1.8.0-openjdk-headless']
+          ['screen', 'bzip2', 'tmux', 'zsh', 'git', 'curl', 'unzip', 'java-1.8.0-openjdk-headless', 'nmap-ncat']
         state: installed
 
     - name: "downloading JanusGraph distribution"
@@ -37,10 +37,9 @@
     - name: "clone Thoth's configuration for JanusGraph"
       connection: local
       git:
-        repo: "https://github.com/goern/janusgraph-thoth-config.git"
+        repo: "https://github.com/thoth-station/janusgraph-thoth-config.git"
         dest: "{{thoth_janusgraph_config_base}}"
-        # version: "v{{janusgraph_version}}-{{thoth_janusgraph_release}}"
-        # version: "feature/index_creation_script"
+        version: "master"
 
     - name: "copy Thoth's configuration for JanusGraph"
       copy:
@@ -62,11 +61,3 @@
       user:
         name: root
         shell: /bin/zsh
-    
-    - name: "Run thoth_init groovy script to create Schema and Indices"
-      command:
-      args:
-        chdir: "{{janusgraph_destination_directory}}/janusgraph-{{janusgraph_version}}-hadoop2/"
-        argv:
-          - "{{janusgraph_destination_directory}}/janusgraph-{{janusgraph_version}}-hadoop2/bin/gremlin.sh"
-          - scripts/thoth_init.groovy

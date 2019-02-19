@@ -53,11 +53,10 @@ buildah config --cmd "/bin/bash" $ctr
 buildah config --workingdir "${JANUSGRAPH_WORKDIR}" $ctr
 buildah config --user user $ctr
 
-# We use same entrypoint in case of local build as in prod, but we adjust it to use the local one when starting the container.
-cp -r bin/local-entrypoint.sh "${mnt}/${JANUSGRAPH_WORKDIR}/bin/"
+cp -r bin/init.sh "${mnt}/${JANUSGRAPH_WORKDIR}/bin/"
 buildah config --entrypoint "${JANUSGRAPH_WORKDIR}/bin/thoth-gremlin-server.sh" $ctr
 
 ## Commit this container to an image name
 buildah umount $ctr
-cid=`buildah commit $ctr thoth-janusgraph`
-buildah tag $cid localhost/thoth-janusgraph:latest
+cid=`buildah commit $ctr thoth-janusgraph-noinit`
+buildah tag $cid localhost/thoth-janusgraph-noinit:latest
