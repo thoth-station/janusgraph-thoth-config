@@ -21,27 +21,11 @@ done
 
 myecho "Gremlin server is reachable now..."
 
-myecho "Preparing schema..."
-${BIN}/gremlin.sh -e "${SCRIPTS}/thoth_schema_definition.groovy"
-
-myecho "Preparing indexes..."
-for file in "${SCRIPTS}/indeces/"*.groovy; do
-    ${BIN}/gremlin.sh -e "${file}"
-done
-
-myecho "Submitting reindex job..."
-${BIN}/gremlin.sh -e "${SCRIPTS}/submit-reindex-jobs.groovy"
-	
-
-myecho "Waiting for indexes to be propagated to cluster..."
-sleep 120
-${BIN}/gremlin.sh -e "${SCRIPTS}/wait-for-indexes.yaml"
-
+myecho "Preparing schema and indexes..."
+${BIN}/gremlin.sh -e "${SCRIPTS}/init.groovy"
 
 myecho "Container is ready now... \o/" 2>&1
 
-[[ "${WAIT_FOREVER}" -eq 0 ]] && exit 0
+[[ "${WAIT_FOREVER}" -ne 0 ]] && sleep inf
 
-while :; do
-  sleep 300
-done
+exit 0

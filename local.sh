@@ -55,6 +55,7 @@ function do_init() {
         -v "${PWD}/scripts/:${JANUSGRAPH_WORKDIR}/scripts:Z" \
         -v "${PWD}/bin/init.sh:${JANUSGRAPH_WORKDIR}/bin/init.sh:Z" \
         --entrypoint "${JANUSGRAPH_WORKDIR}/bin/init.sh" \
+        -e WAIT_FOREVER=0 \
         --name thoth-janusgraph-local \
         localhost/thoth-janusgraph-noinit
     [[ $? -ne 0 ]] && {
