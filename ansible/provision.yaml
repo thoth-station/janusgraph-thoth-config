@@ -57,6 +57,14 @@
         path: "{{thoth_janusgraph_config_base}}"
         state: absent
 
+    - name: "Run thoth_init groovy script to create Schema and Indices"
+      command:
+      args:
+        chdir: "{{janusgraph_destination_directory}}/janusgraph-{{janusgraph_version}}-hadoop2/"
+        argv:
+          - bin/init.sh
+      when: janusgraph_init
+
     - name: "We want zsh!!"
       user:
         name: root

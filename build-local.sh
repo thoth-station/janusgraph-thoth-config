@@ -15,8 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-[ -z "$SUDO_COMMAND" ] && exec sudo $0
-
 source ./vars.sh
 
 if ! type buildah; then
@@ -41,7 +39,7 @@ cp -r ansible/ "${mnt}/${JANUSGRAPH_WORKDIR}"
 
 # Add ansible playbooks and explicitly set host to localhost.
 echo  -e "[gremlin_servers]\nlocalhost\n" > "${mnt}/${JANUSGRAPH_WORKDIR}/ansible/hosts"
-buildah run $ctr -- ansible-playbook --connection=local "${JANUSGRAPH_WORKDIR}/ansible/provision.yaml" -i "${JANUSGRAPH_WORKDIR}/ansible/hosts"
+buildah run $ctr -- ansible-playbook --extra-vars "janusgraph_init=false" --connection=local "${JANUSGRAPH_WORKDIR}/ansible/provision.yaml" -i "${JANUSGRAPH_WORKDIR}/ansible/hosts"
 rm -rf "${mnt}/${JANUSGRAPH_WORKDIR}/ansible"
 
 buildah run $ctr -- chown user:user -R "${JANUSGRAPH_WORKDIR}"

@@ -102,3 +102,6 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+janusgraph-0.3.1-hadoop2
+janusgraph-0.3.1-hadoop2.zip

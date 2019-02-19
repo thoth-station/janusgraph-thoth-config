@@ -30,8 +30,10 @@ USAGE:
 
 COMMANDS:
 
+    all\t\tBuild, initialize and run JanusGraph server as one shot.
     build\tBuild raw JanusGraph without any schema and index configuration.
     clean\tClean all resources used.
+    download\tDownload the upstream version of JanusGraph into a local directory.
     help\tShow this help and exit.
     init\tInitialize JanusGraph with the local copy of schema and index configuration (has to be run after build).
     rmi\t\tRemove initialized JanusGraph image.
@@ -48,23 +50,43 @@ which podman > /dev/null || die "No podman command found"
 
 source ./vars.sh
 
+function do_init() {
+    podman run -it -p 8182:8182 \
+        -v "${PWD}/scripts/:${JANUSGRAPH_WORKDIR}/scripts:Z" \
+        -v "${PWD}/bin/init.sh:${JANUSGRAPH_WORKDIR}/bin/init.sh:Z" \
+        --entrypoint "${JANUSGRAPH_WORKDIR}/bin/init.sh" \
+        --name thoth-janusgraph-local \
+        localhost/thoth-janusgraph-noinit
+    [[ $? -ne 0 ]] && {
+        podman rm thoth-janusgraph-local 2>/dev/null
+        die "JanusGraph failed to initialize properly..."
+    }
+    echo "Committing initialized container..."
+    podman commit thoth-janusgraph-local localhost/thoth-janusgraph-init
+    podman rm thoth-janusgraph-local
+}
+
+function do_run() {
+    podman run -it -p 8182:8182 \
+        -v "${PWD}/scripts/:${JANUSGRAPH_WORKDIR}/scripts:Z" \
+        -v "${PWD}/bin/init.sh:${JANUSGRAPH_WORKDIR}/bin/init.sh:Z" \
+        localhost/thoth-janusgraph-noinit
+}
 
 case $1 in
+    "all")
+	./build-local.sh
+	do_init
+	do_run
+        ;;
     "init")
         shift
-        podman run -it -p 8182:8182 \
-            -v "${PWD}/scripts/:${JANUSGRAPH_WORKDIR}/scripts:Z" \
-            -v "${PWD}/bin/init.sh:${JANUSGRAPH_WORKDIR}/bin/init.sh:Z" \
-            --entrypoint "${JANUSGRAPH_WORKDIR}/bin/init.sh" \
-            --name thoth-janusgraph-local \
-            localhost/thoth-janusgraph-noinit
-        [[ $? -ne 0 ]] && {
-            podman rm thoth-janusgraph-local 2>/dev/null
-            die "JanusGraph failed to initialize properly..."
-        }
-        echo "Committing initialized container..."
-        podman commit thoth-janusgraph-local localhost/thoth-janusgraph-init
-        podman rm thoth-janusgraph-local
+        do_init
+        ;;
+    "download")
+        shift
+        curl -L "https://github.com/JanusGraph/janusgraph/releases/download/v${JANUSGRAPH_VERSION_IDENTIFIER}/janusgraph-${JANUSGRAPH_VERSION}.zip" -o "janusgraph-${JANUSGRAPH_VERSION}.zip"
+        unzip "janusgraph-${JANUSGRAPH_VERSION}.zip" && echo "Extracted JanusGraph present in ${PWD}"
         ;;
     "bash"|"sh")
         shift
@@ -95,10 +117,7 @@ case $1 in
         ;;
     "run")
         shift
-        podman run -it -p 8182:8182 \
-            -v "${PWD}/scripts/:${JANUSGRAPH_WORKDIR}/scripts:Z" \
-            -v "${PWD}/bin/init.sh:${JANUSGRAPH_WORKDIR}/bin/init.sh:Z" \
-            localhost/thoth-janusgraph-noinit
+	do_run
         ;;
     "help"|"--help"|*)
         shift
