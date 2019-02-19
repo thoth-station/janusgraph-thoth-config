@@ -24,8 +24,6 @@ myecho "Gremlin server is reachable now..."
 myecho "Preparing schema and indexes..."
 ${BIN}/gremlin.sh -e "${SCRIPTS}/init.groovy"
 
-myecho "Container is ready now... \o/" 2>&1
-
-[[ "${WAIT_FOREVER}" -ne 0 ]] && sleep inf
+myecho "Container is ready now... \o/"
 
 exit 0
