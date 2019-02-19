@@ -75,9 +75,9 @@ function do_run() {
 
 case $1 in
     "all")
-	./build-local.sh
-	do_init
-	do_run
+        ./build-local.sh
+        do_init
+        do_run
         ;;
     "init")
         shift
