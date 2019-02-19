@@ -33,6 +33,7 @@ COMMANDS:
     all\t\tBuild, initialize and run JanusGraph server as one shot.
     build\tBuild raw JanusGraph without any schema and index configuration.
     clean\tClean all resources used.
+    continue\tContinue with already started container (after ^C).
     download\tDownload the upstream version of JanusGraph into a local directory.
     help\tShow this help and exit.
     init\tInitialize JanusGraph with the local copy of schema and index configuration (has to be run after build).
@@ -70,6 +71,7 @@ function do_run() {
     podman run -it -p 8182:8182 \
         -v "${PWD}/scripts/:${JANUSGRAPH_WORKDIR}/scripts:Z" \
         --entrypoint "${JANUSGRAPH_WORKDIR}/bin/thoth-gremlin-server.sh" \
+        --name thoth-janusgraph-local \
         localhost/thoth-janusgraph-init
 }
 
@@ -117,7 +119,11 @@ case $1 in
         ;;
     "run")
         shift
-	do_run
+        do_run
+        ;;
+    "continue")
+        shift
+        podman start -ia thoth-janusgraph-local
         ;;
     "help"|"--help"|*)
         shift
