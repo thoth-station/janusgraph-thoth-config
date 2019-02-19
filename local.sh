@@ -56,15 +56,15 @@ function do_init() {
         -v "${PWD}/scripts/:${JANUSGRAPH_WORKDIR}/scripts:Z" \
         -v "${PWD}/bin/init.sh:${JANUSGRAPH_WORKDIR}/bin/init.sh:Z" \
         --entrypoint "${JANUSGRAPH_WORKDIR}/bin/init.sh" \
-        --name thoth-janusgraph-local \
+        --name thoth-janusgraph-local-tmp \
         localhost/thoth-janusgraph-noinit
     [[ $? -ne 0 ]] && {
-        podman rm thoth-janusgraph-local 2>/dev/null
+        podman rm thoth-janusgraph-local-tmp 2>/dev/null
         die "JanusGraph failed to initialize properly..."
     }
     echo "Committing initialized container..."
-    podman commit thoth-janusgraph-local localhost/thoth-janusgraph-init
-    podman rm thoth-janusgraph-local
+    podman commit thoth-janusgraph-local-tmp localhost/thoth-janusgraph-init
+    podman rm thoth-janusgraph-local-tmp
 }
 
 function do_run() {
