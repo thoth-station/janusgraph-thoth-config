@@ -21,7 +21,7 @@ if ! type buildah; then
     dnf install -y --setopt=tsflags=nodocs buildah
 fi
 
-ctr=$(buildah from "fedora:29")
+ctr=$(buildah from "registry.fedoraproject.org/fedora:29")
 mnt=$(buildah mount $ctr)
 
 ## Install components.
