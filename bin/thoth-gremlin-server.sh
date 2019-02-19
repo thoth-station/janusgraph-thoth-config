@@ -61,7 +61,7 @@ if [ "$1" = "-i" ]; then
 else
   ARGS="$@"
   if [ $# = 0 ] ; then
-    ARGS="conf/gremlin-server/gremlin-server.yaml"
+    ARGS="conf/gremlin-server/thoth.yaml"
   fi
   exec $JAVA -Djanusgraph.logdir="$JANUSGRAPH_LOGDIR" -Dlog4j.configuration=conf/gremlin-server/log4j-server.properties $JAVA_OPTIONS -cp $CP:$CLASSPATH org.apache.tinkerpop.gremlin.server.GremlinServer $ARGS
 fi
