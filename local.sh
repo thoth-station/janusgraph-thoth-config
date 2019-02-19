@@ -70,8 +70,8 @@ function do_init() {
 function do_run() {
     podman run -it -p 8182:8182 \
         -v "${PWD}/scripts/:${JANUSGRAPH_WORKDIR}/scripts:Z" \
-        -v "${PWD}/bin/init.sh:${JANUSGRAPH_WORKDIR}/bin/init.sh:Z" \
-        localhost/thoth-janusgraph-noinit
+        --entrypoint "${JANUSGRAPH_WORKDIR}/bin/thoth-gremlin-server.sh" \
+        localhost/thoth-janusgraph-init
 }
 
 case $1 in
