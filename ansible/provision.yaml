@@ -40,7 +40,7 @@
         repo: "https://github.com/goern/janusgraph-thoth-config.git"
         dest: "{{thoth_janusgraph_config_base}}"
         # version: "v{{janusgraph_version}}-{{thoth_janusgraph_release}}"
-        version: "feature/index_creation_script"
+        # version: "feature/index_creation_script"
 
     - name: "copy Thoth's configuration for JanusGraph"
       copy:
