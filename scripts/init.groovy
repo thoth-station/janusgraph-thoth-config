@@ -362,7 +362,6 @@ mgmt.buildIndex('byPackage', org.apache.tinkerpop.gremlin.structure.Vertex.class
 
 mgmt.buildIndex('byPythonPackageVersion', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
    .addKey(lbl) \
-   .addKey(type) \
    .addKey(ecosystem_p) \
    .addKey(package_name_p) \
    .addKey(package_version_p) \
