@@ -15,15 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-[ -z "$SUDO_COMMAND" ] && exec sudo $0
-
 source ./vars.sh
 
 if ! type buildah; then
     dnf install -y --setopt=tsflags=nodocs buildah
 fi
 
-ctr=$(buildah from "fedora:29")
+ctr=$(buildah from "registry.fedoraproject.org/fedora:29")
 mnt=$(buildah mount $ctr)
 
 ## Install components.
@@ -41,7 +39,7 @@ cp -r ansible/ "${mnt}/${JANUSGRAPH_WORKDIR}"
 
 # Add ansible playbooks and explicitly set host to localhost.
 echo  -e "[gremlin_servers]\nlocalhost\n" > "${mnt}/${JANUSGRAPH_WORKDIR}/ansible/hosts"
-buildah run $ctr -- ansible-playbook --connection=local "${JANUSGRAPH_WORKDIR}/ansible/provision.yaml" -i "${JANUSGRAPH_WORKDIR}/ansible/hosts"
+buildah run $ctr -- ansible-playbook --extra-vars "janusgraph_init=false" --connection=local "${JANUSGRAPH_WORKDIR}/ansible/provision.yaml" -i "${JANUSGRAPH_WORKDIR}/ansible/hosts"
 rm -rf "${mnt}/${JANUSGRAPH_WORKDIR}/ansible"
 
 buildah run $ctr -- chown user:user -R "${JANUSGRAPH_WORKDIR}"
@@ -53,11 +51,10 @@ buildah config --cmd "/bin/bash" $ctr
 buildah config --workingdir "${JANUSGRAPH_WORKDIR}" $ctr
 buildah config --user user $ctr
 
-# We use same entrypoint in case of local build as in prod, but we adjust it to use the local one when starting the container.
-cp -r bin/local-entrypoint.sh "${mnt}/${JANUSGRAPH_WORKDIR}/bin/"
+cp -r bin/init.sh "${mnt}/${JANUSGRAPH_WORKDIR}/bin/"
 buildah config --entrypoint "${JANUSGRAPH_WORKDIR}/bin/thoth-gremlin-server.sh" $ctr
 
 ## Commit this container to an image name
 buildah umount $ctr
-cid=`buildah commit $ctr thoth-janusgraph`
-buildah tag $cid localhost/thoth-janusgraph:latest
+cid=`buildah commit $ctr thoth-janusgraph-noinit`
+buildah tag $cid localhost/thoth-janusgraph-noinit:latest

@@ -1,0 +1,123 @@
+mgmt.buildIndex('byEdge', org.apache.tinkerpop.gremlin.structure.Edge.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byPackage', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(ecosystem_p) \
+   .addKey(package_name_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byPythonPackageVersion', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(ecosystem_p) \
+   .addKey(package_name_p) \
+   .addKey(package_version_p) \
+   .addKey(index_url_p) \
+   .indexOnly(python_package_version_vl) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byPythonPackageIndex', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(url_p) \
+   .addKey(warehouse_api_url_p) \
+   .addKey(verify_ssl_p) \
+   .addKey(warehouse_api_url_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byPythonArtifact', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(artifact_hash_sha256_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byIsPartOf', org.apache.tinkerpop.gremlin.structure.Edge.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(analysis_datetime_p) \
+   .addKey(analysis_document_id_p) \
+   .addKey(analyzer_name_p) \
+   .addKey(analyzer_version_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byDependsOn', org.apache.tinkerpop.gremlin.structure.Edge.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(version_range_p) \
+   .addKey(package_name_p) \
+   .addKey(extras_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byCVE', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(version_range_p) \
+   .addKey(advisory_p) \
+   .addKey(cve_name_p) \
+   .addKey(cve_id_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('bySolved', org.apache.tinkerpop.gremlin.structure.Edge.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(solver_datetime_p) \
+   .addKey(solver_document_id_p) \
+   .addKey(solver_error_p) \
+   .addKey(solver_error_unsolvable_p) \
+   .addKey(solver_error_unparsable_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byRequires', org.apache.tinkerpop.gremlin.structure.Edge.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(analysis_datetime_p) \
+   .addKey(analysis_document_id_p) \
+   .addKey(analyzer_name_p) \
+   .addKey(analyzer_version_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byRuntimeEnvironment', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(runtime_environment_name_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byRPMRequirement', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(rpm_requirement_name_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byRPMPackageVersion', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(ecosystem_p) \
+   .addKey(package_name_p) \
+   .addKey(package_version_p) \
+   .addKey(release_p) \
+   .addKey(epoch_p) \
+   .addKey(arch_p) \
+   .addKey(src_p) \
+   .addKey(package_identifier_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byEcosystemSolver', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(solver_name_p) \
+   .addKey(solver_version_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byDebPackageVersion', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(ecosystem_p) \
+   .addKey(package_name_p) \
+   .addKey(package_version_p) \
+   .addKey(epoch_p) \
+   .addKey(arch_p) \
+   .buildCompositeIndex()
