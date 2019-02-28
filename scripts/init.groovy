@@ -103,6 +103,10 @@ depends_on_el = mgmt.getEdgeLabel('depends_on')
 if (depends_on_el == null)
   depends_on_el = mgmt.makeEdgeLabel('depends_on').make()
 
+has_artifact_el = mgmt.getEdgeLabel('has_artifact')
+if (has_artifact_el == null)
+  has_artifact_el = mgmt.makeEdgeLabel('has_artifact').make()
+
 has_version_el = mgmt.getEdgeLabel('has_version')
 if (has_version_el == null)
   has_version_el = mgmt.makeEdgeLabel('has_version').make()
