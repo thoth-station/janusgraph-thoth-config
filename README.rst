@@ -28,14 +28,14 @@ The command above will produce a container image with JanusGraph without any
 schema and indexes being created. To initialize JanusGraph with schema and
 indexes, run the following command after the ``build`` command:
 
-.. code-bloack:: console
+.. code-block:: console
 
   ./local.sh init
 
 With this command you will have an initialized local JanusGraph instance which
 you can run using the ``run`` command:
 
-.. code-bloack:: console
+.. code-block:: console
 
   ./local.sh run
 
