@@ -74,3 +74,20 @@ libraries and CLIs in Thoth will automatically talk to this instance. See
 <https://github.com/thoth-station/thoth/blob/master/docs/developers_guide.rst#developers-guide-to-thoth>`_
 for more info.
 
+Troubleshooting local instance
+==============================
+
+Q: I'm getting an error message that the JanusGraph instance has too many files opened.
+
+Place the following configuration into your `/etc/security/limits.conf`:
+
+.. code-block::
+
+  * soft nofile 4096
+  * hard nofile 4096
+
+And verify the new configuration is applied:
+
+.. code-block:: console
+
+  $  ulimit -Sn
