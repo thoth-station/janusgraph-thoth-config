@@ -128,3 +128,9 @@ mgmt.buildIndex('byDebPackageVersion', org.apache.tinkerpop.gremlin.structure.Ve
    .addKey(epoch_p) \
    .addKey(arch_p) \
    .buildCompositeIndex()
+
+mgmt.buildIndex('byDocumentId', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(document_id_p) \
+   .buildCompositeIndex()
