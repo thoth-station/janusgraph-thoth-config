@@ -366,11 +366,19 @@ mgmt.buildIndex('byPackage', org.apache.tinkerpop.gremlin.structure.Vertex.class
 
 mgmt.buildIndex('byPythonPackageVersion', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
    .addKey(lbl) \
+   .addKey(type) \
    .addKey(ecosystem_p) \
    .addKey(package_name_p) \
    .addKey(package_version_p) \
    .addKey(index_url_p) \
    .indexOnly(python_package_version_vl) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byPythonPackageVersionNoIndex', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(ecosystem_p) \
+   .addKey(package_name_p) \
+   .addKey(package_version_p) \
    .buildCompositeIndex()
 
 mgmt.buildIndex('byPythonPackageIndex', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
@@ -473,6 +481,12 @@ mgmt.buildIndex('byDebPackageVersion', org.apache.tinkerpop.gremlin.structure.Ve
    .addKey(package_version_p) \
    .addKey(epoch_p) \
    .addKey(arch_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byDocumentId', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(document_id_p) \
    .buildCompositeIndex()
 
 mgmt.commit()
