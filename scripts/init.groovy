@@ -489,4 +489,15 @@ mgmt.buildIndex('byDocumentId', org.apache.tinkerpop.gremlin.structure.Vertex.cl
    .addKey(document_id_p) \
    .buildCompositeIndex()
 
+mgmt.buildIndex('byHardwareInformation', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(cpu_model_name_p) \
+   .addKey(cpu_model_p) \
+   .addKey(cpu_family_p) \
+   .addKey(cpu_cores_p) \
+   .addKey(cpu_physical_cpus_p) \
+   .addKey(ram_size_p) \
+   .buildCompositeIndex()
+
 mgmt.commit()
