@@ -447,6 +447,12 @@ mgmt.buildIndex('byRuntimeEnvironment', org.apache.tinkerpop.gremlin.structure.V
    .addKey(runtime_environment_name_p) \
    .buildCompositeIndex()
 
+mgmt.buildIndex('byBuildtimeEnvironment', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(buildtime_environment_name_p) \
+   .buildCompositeIndex()
+
 mgmt.buildIndex('byRPMRequirement', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
    .addKey(lbl) \
    .addKey(type) \
