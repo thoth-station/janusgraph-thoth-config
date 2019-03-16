@@ -274,7 +274,7 @@ if (python_version_p == null)
 
 ram_size_p = mgmt.getPropertyKey('ram_size')
 if (ram_size_p == null)
-  ram_size_p = mgmt.makePropertyKey('ram_size').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+  ram_size_p = mgmt.makePropertyKey('ram_size').dataType(Float.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 release_p = mgmt.getPropertyKey('release')
 if (release_p == null)
