@@ -180,10 +180,6 @@ build_error_p = mgmt.getPropertyKey('build_error')
 if (build_error_p == null)
   build_error_p = mgmt.makePropertyKey('build_error').dataType(Boolean.class).make()
 
-buildtime_environment_name_p = mgmt.getPropertyKey('buildtime_environment_name')
-if (buildtime_environment_name_p == null)
-  buildtime_environment_name_p = mgmt.makePropertyKey('buildtime_environment_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
-
 cpu_cores_p = mgmt.getPropertyKey('cpu_cores')
 if (cpu_cores_p == null)
   cpu_cores_p = mgmt.makePropertyKey('cpu_cores').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
@@ -223,6 +219,10 @@ if (document_id_p == null)
 ecosystem_p = mgmt.getPropertyKey('ecosystem')
 if (ecosystem_p == null)
   ecosystem_p = mgmt.makePropertyKey('ecosystem').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+
+environment_name_p = mgmt.getPropertyKey('environment_name')
+if (environment_name_p == null)
+  environment_name_p = mgmt.makePropertyKey('environment_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 epoch_p = mgmt.getPropertyKey('epoch')
 if (epoch_p == null)
@@ -287,10 +287,6 @@ if (rpm_requirement_name_p == null)
 run_error_p = mgmt.getPropertyKey('run_error')
 if (run_error_p == null)
   run_error_p = mgmt.makePropertyKey('run_error').dataType(Boolean.class).make()
-
-runtime_environment_name_p = mgmt.getPropertyKey('runtime_environment_name')
-if (runtime_environment_name_p == null)
-  runtime_environment_name_p = mgmt.makePropertyKey('runtime_environment_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 solver_datetime_p = mgmt.getPropertyKey('solver_datetime')
 if (solver_datetime_p == null)
@@ -441,16 +437,10 @@ mgmt.buildIndex('byRequires', org.apache.tinkerpop.gremlin.structure.Edge.class)
    .addKey(analyzer_version_p) \
    .buildCompositeIndex()
 
-mgmt.buildIndex('byRuntimeEnvironment', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+mgmt.buildIndex('byEnvironment', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
    .addKey(lbl) \
    .addKey(type) \
-   .addKey(runtime_environment_name_p) \
-   .buildCompositeIndex()
-
-mgmt.buildIndex('byBuildtimeEnvironment', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
-   .addKey(lbl) \
-   .addKey(type) \
-   .addKey(buildtime_environment_name_p) \
+   .addKey(environment_name_p) \
    .buildCompositeIndex()
 
 mgmt.buildIndex('byRPMRequirement', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
