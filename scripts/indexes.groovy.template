@@ -87,16 +87,10 @@ mgmt.buildIndex('byRequires', org.apache.tinkerpop.gremlin.structure.Edge.class)
    .addKey(analyzer_version_p) \
    .buildCompositeIndex()
 
-mgmt.buildIndex('byRuntimeEnvironment', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+mgmt.buildIndex('byEnvironment', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
    .addKey(lbl) \
    .addKey(type) \
-   .addKey(runtime_environment_name_p) \
-   .buildCompositeIndex()
-
-mgmt.buildIndex('byBuildtimeEnvironment', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
-   .addKey(lbl) \
-   .addKey(type) \
-   .addKey(buildtime_environment_name_p) \
+   .addKey(environment_name_p) \
    .buildCompositeIndex()
 
 mgmt.buildIndex('byRPMRequirement', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
