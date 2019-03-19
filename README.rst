@@ -92,6 +92,7 @@ Adjust entry in `hosts` so that it points to an instance you would like to talk 
   #   hosts: [localhost]
   # to:
   #   hosts: [janusgraph.test.thoth-station.ninja]
+  # sed -i s/localhost/janusgraph.test.thoth-station.ninja/ janusgraph-*-hadoop2/conf/remote.yaml
 
 Run Gremlin shell:
 
