@@ -74,6 +74,46 @@ libraries and CLIs in Thoth will automatically talk to this instance. See
 <https://github.com/thoth-station/thoth/blob/master/docs/developers_guide.rst#developers-guide-to-thoth>`_
 for more info.
 
+Connecting to a remote instance using Gremlin shell
+===================================================
+
+First, download JanusGraph release which provides gremlin shell:
+
+.. code-block::
+
+  ./local.sh download
+
+Adjust entry in `hosts` so that it points to an instance you would like to talk to:
+
+.. code-block:: console
+
+  vim janusgraph-*-hadoop2/conf/remote.yaml
+  # Adjust "hosts", e.g. from:
+  #   hosts: [localhost]
+  # to:
+  #   hosts: [janusgraph.test.thoth-station.ninja]
+  # sed -i s/localhost/janusgraph.test.thoth-station.ninja/ janusgraph-*-hadoop2/conf/remote.yaml
+
+Run Gremlin shell:
+
+.. code-block:: console
+
+  ./janusgraph-0.3.1-hadoop2/bin/gremlin.sh
+
+And execute following commands to connect to a remote instance:
+
+.. code-block:: console
+
+  :remote connect tinkerpop.server conf/remote.yaml session
+  :remote console
+
+To profile a query:
+
+.. code-block:: console
+
+  g.V().count().profile()
+
+
 Troubleshooting local instance
 ==============================
 
