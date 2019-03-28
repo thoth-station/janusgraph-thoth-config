@@ -180,10 +180,6 @@ build_error_p = mgmt.getPropertyKey('build_error')
 if (build_error_p == null)
   build_error_p = mgmt.makePropertyKey('build_error').dataType(Boolean.class).make()
 
-buildtime_environment_name_p = mgmt.getPropertyKey('buildtime_environment_name')
-if (buildtime_environment_name_p == null)
-  buildtime_environment_name_p = mgmt.makePropertyKey('buildtime_environment_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
-
 cpu_cores_p = mgmt.getPropertyKey('cpu_cores')
 if (cpu_cores_p == null)
   cpu_cores_p = mgmt.makePropertyKey('cpu_cores').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
@@ -223,6 +219,10 @@ if (document_id_p == null)
 ecosystem_p = mgmt.getPropertyKey('ecosystem')
 if (ecosystem_p == null)
   ecosystem_p = mgmt.makePropertyKey('ecosystem').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+
+environment_name_p = mgmt.getPropertyKey('environment_name')
+if (environment_name_p == null)
+  environment_name_p = mgmt.makePropertyKey('environment_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 epoch_p = mgmt.getPropertyKey('epoch')
 if (epoch_p == null)
@@ -274,7 +274,7 @@ if (python_version_p == null)
 
 ram_size_p = mgmt.getPropertyKey('ram_size')
 if (ram_size_p == null)
-  ram_size_p = mgmt.makePropertyKey('ram_size').dataType(Integer.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+  ram_size_p = mgmt.makePropertyKey('ram_size').dataType(Float.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 release_p = mgmt.getPropertyKey('release')
 if (release_p == null)
@@ -287,10 +287,6 @@ if (rpm_requirement_name_p == null)
 run_error_p = mgmt.getPropertyKey('run_error')
 if (run_error_p == null)
   run_error_p = mgmt.makePropertyKey('run_error').dataType(Boolean.class).make()
-
-runtime_environment_name_p = mgmt.getPropertyKey('runtime_environment_name')
-if (runtime_environment_name_p == null)
-  runtime_environment_name_p = mgmt.makePropertyKey('runtime_environment_name').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
 
 solver_datetime_p = mgmt.getPropertyKey('solver_datetime')
 if (solver_datetime_p == null)
@@ -366,11 +362,19 @@ mgmt.buildIndex('byPackage', org.apache.tinkerpop.gremlin.structure.Vertex.class
 
 mgmt.buildIndex('byPythonPackageVersion', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
    .addKey(lbl) \
+   .addKey(type) \
    .addKey(ecosystem_p) \
    .addKey(package_name_p) \
    .addKey(package_version_p) \
    .addKey(index_url_p) \
    .indexOnly(python_package_version_vl) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byPythonPackageVersionNoIndex', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(ecosystem_p) \
+   .addKey(package_name_p) \
+   .addKey(package_version_p) \
    .buildCompositeIndex()
 
 mgmt.buildIndex('byPythonPackageIndex', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
@@ -433,10 +437,10 @@ mgmt.buildIndex('byRequires', org.apache.tinkerpop.gremlin.structure.Edge.class)
    .addKey(analyzer_version_p) \
    .buildCompositeIndex()
 
-mgmt.buildIndex('byRuntimeEnvironment', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+mgmt.buildIndex('byEnvironment', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
    .addKey(lbl) \
    .addKey(type) \
-   .addKey(runtime_environment_name_p) \
+   .addKey(environment_name_p) \
    .buildCompositeIndex()
 
 mgmt.buildIndex('byRPMRequirement', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
@@ -473,6 +477,23 @@ mgmt.buildIndex('byDebPackageVersion', org.apache.tinkerpop.gremlin.structure.Ve
    .addKey(package_version_p) \
    .addKey(epoch_p) \
    .addKey(arch_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byDocumentId', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(document_id_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byHardwareInformation', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(cpu_model_name_p) \
+   .addKey(cpu_model_p) \
+   .addKey(cpu_family_p) \
+   .addKey(cpu_cores_p) \
+   .addKey(cpu_physical_cpus_p) \
+   .addKey(ram_size_p) \
    .buildCompositeIndex()
 
 mgmt.commit()

@@ -87,10 +87,10 @@ mgmt.buildIndex('byRequires', org.apache.tinkerpop.gremlin.structure.Edge.class)
    .addKey(analyzer_version_p) \
    .buildCompositeIndex()
 
-mgmt.buildIndex('byRuntimeEnvironment', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+mgmt.buildIndex('byEnvironment', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
    .addKey(lbl) \
    .addKey(type) \
-   .addKey(runtime_environment_name_p) \
+   .addKey(environment_name_p) \
    .buildCompositeIndex()
 
 mgmt.buildIndex('byRPMRequirement', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
@@ -127,4 +127,21 @@ mgmt.buildIndex('byDebPackageVersion', org.apache.tinkerpop.gremlin.structure.Ve
    .addKey(package_version_p) \
    .addKey(epoch_p) \
    .addKey(arch_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byDocumentId', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(document_id_p) \
+   .buildCompositeIndex()
+
+mgmt.buildIndex('byHardwareInformation', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
+   .addKey(lbl) \
+   .addKey(type) \
+   .addKey(cpu_model_name_p) \
+   .addKey(cpu_model_p) \
+   .addKey(cpu_family_p) \
+   .addKey(cpu_cores_p) \
+   .addKey(cpu_physical_cpus_p) \
+   .addKey(ram_size_p) \
    .buildCompositeIndex()

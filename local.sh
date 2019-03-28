@@ -54,6 +54,7 @@ source ./vars.sh
 function do_init() {
     podman run -it -p 8182:8182 \
         -v "${PWD}/scripts/:${JANUSGRAPH_WORKDIR}/scripts:Z" \
+        -v "${PWD}/conf/gremlin-server/thoth.yaml:${JANUSGRAPH_WORKDIR}/conf/gremlin-server/thoth.yaml:Z" \
         -v "${PWD}/bin/init.sh:${JANUSGRAPH_WORKDIR}/bin/init.sh:Z" \
         --entrypoint "${JANUSGRAPH_WORKDIR}/bin/init.sh" \
         --name thoth-janusgraph-local-tmp \
@@ -70,6 +71,7 @@ function do_init() {
 function do_run() {
     podman run -it -p 8182:8182 \
         -v "${PWD}/scripts/:${JANUSGRAPH_WORKDIR}/scripts:Z" \
+        -v "${PWD}/conf/gremlin-server/thoth.yaml:${JANUSGRAPH_WORKDIR}/conf/gremlin-server/thoth.yaml:Z" \
         --entrypoint "${JANUSGRAPH_WORKDIR}/bin/thoth-gremlin-server.sh" \
         --name thoth-janusgraph-local \
         localhost/thoth-janusgraph-init
