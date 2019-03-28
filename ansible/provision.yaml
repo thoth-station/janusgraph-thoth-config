@@ -2,8 +2,8 @@
 - name: "Deploy Thoth's Gremlin Server"
   hosts: gremlin_servers
 
-  remote_user: root
-  become: false
+  remote_user: centos
+  become: true
 
   tasks:
     - name: "upgrade all packages"
@@ -12,7 +12,17 @@
     - name: "install required packages"
       yum:
         name:
-          ['screen', 'bzip2', 'tmux', 'zsh', 'git', 'curl', 'unzip', 'java-1.8.0-openjdk-headless', 'nmap-ncat']
+          [
+            "screen",
+            "bzip2",
+            "tmux",
+            "zsh",
+            "git",
+            "curl",
+            "unzip",
+            "java-1.8.0-openjdk-headless",
+            "nmap-ncat",
+          ]
         state: installed
 
     - name: "downloading JanusGraph distribution"
@@ -56,6 +66,11 @@
       file:
         path: "{{thoth_janusgraph_config_base}}"
         state: absent
+
+    - name: "change permissions of init.sh"
+      file:
+        path: "{{janusgraph_destination_directory}}/janusgraph-{{janusgraph_version}}-hadoop2/bin/init.sh"
+        mode: 0755
 
     - name: "Run thoth_init groovy script to create Schema and Indices"
       command:

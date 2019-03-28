@@ -3,3 +3,12 @@ janusgraph_destination_directory: "/opt"
 thoth_janusgraph_release: 1
 thoth_janusgraph_config_base: "/tmp/janusgraph-thoth-config"
 janusgraph_init: true
+
+provider_net_subnet_cci_4: "10.0.144.0/22"
+rfc_1918_net_10: "10.0.0.0/8"
+
+image_id: "c689e636-5a62-4ae6-ab79-193798e7d9b1" # CentOS-7-x86_64-GenericCloud-1808
+net_id: "68a8220a-20f4-4940-99b4-45b6f98bce6b" # provider_net_cci_4
+flavor_m1_large_id: "a9acc2de-39d7-4148-8d16-413c3b696e9d"
+flavor_m1_small_id: "b23c29c8-b888-4eff-b839-7a0d4e59fec0"
+flavor_ci_m5_large_id: "9108d0b1-eaaa-4199-b609-95ab2b7b3a66"
