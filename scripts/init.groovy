@@ -107,6 +107,10 @@ has_artifact_el = mgmt.getEdgeLabel('has_artifact')
 if (has_artifact_el == null)
   has_artifact_el = mgmt.makeEdgeLabel('has_artifact').make()
 
+has_index_el = mgmt.getEdgeLabel('has_index')
+if (has_index_el == null)
+  has_index_el = mgmt.makeEdgeLabel('has_index').make()
+
 has_version_el = mgmt.getEdgeLabel('has_version')
 if (has_version_el == null)
   has_version_el = mgmt.makeEdgeLabel('has_version').make()
@@ -383,7 +387,6 @@ mgmt.buildIndex('byPythonPackageIndex', org.apache.tinkerpop.gremlin.structure.V
    .addKey(url_p) \
    .addKey(warehouse_api_url_p) \
    .addKey(verify_ssl_p) \
-   .addKey(warehouse_api_url_p) \
    .buildCompositeIndex()
 
 mgmt.buildIndex('byPythonArtifact', org.apache.tinkerpop.gremlin.structure.Vertex.class) \

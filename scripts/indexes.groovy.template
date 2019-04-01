@@ -33,7 +33,6 @@ mgmt.buildIndex('byPythonPackageIndex', org.apache.tinkerpop.gremlin.structure.V
    .addKey(url_p) \
    .addKey(warehouse_api_url_p) \
    .addKey(verify_ssl_p) \
-   .addKey(warehouse_api_url_p) \
    .buildCompositeIndex()
 
 mgmt.buildIndex('byPythonArtifact', org.apache.tinkerpop.gremlin.structure.Vertex.class) \
